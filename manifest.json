@@ -1,0 +1,28 @@
+{
+    "name": "Trello Scrum",
+    "description": "...",
+    "version": "0.1",
+    "manifest_version": 2,
+    "content_scripts": [{
+        "matches": [
+            "https://trello.com/*"
+        ],
+        "js": [
+            "src/libs/jquery/dist/jquery.min.js",
+            "src/card.js",
+            "src/list.js",
+            "src/lists.js",
+            "src/main.js"
+        ],
+        "css": [
+            "src/css/style.css"
+        ]
+    }],
+    "icons": {
+        "128": "src/img/icon_128x128.png"
+    },
+    "web_accessible_resources": [],
+    "permissions": [
+        "storage"
+    ]
+}
