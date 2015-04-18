@@ -1,9 +1,10 @@
-function Lists() {
+function GetLists() {
     this.elem = $('.list');
 }
 
-Lists.prototype.all = function () {
+GetLists.prototype.execute = function () {
     var lists = [];
+
     $.each(this.elem, function (i, listElem) {
         lists.push(new List(listElem));
     });
