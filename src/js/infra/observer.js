@@ -1,3 +1,5 @@
+'use strict';
+
 function Observer() {
     this.config = {
         childList: true,
@@ -10,4 +12,4 @@ function Observer() {
 Observer.prototype.observe = function (elem, callback) {
     var observer = new MutationObserver(callback);
     observer.observe(elem, this.config);
-}
+};

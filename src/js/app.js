@@ -1,3 +1,5 @@
+'use strict';
+
 function App() {
     var getLists = new GetLists();
     this.lists = getLists.execute();
@@ -8,4 +10,4 @@ App.prototype.updateListPoints = function () {
         var points = list.points();
         list.showPoints(points);
     });
-}
+};

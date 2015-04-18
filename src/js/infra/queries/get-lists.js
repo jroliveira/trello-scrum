@@ -1,3 +1,5 @@
+'use strict';
+
 function GetLists() {
     this.elem = $('.list');
 }
@@ -10,4 +12,4 @@ GetLists.prototype.execute = function () {
     });
 
     return lists;
-}
+};

@@ -1,0 +1,28 @@
+ul.ts-points {
+    list-style: none;
+    margin-top: 20px;
+}
+
+ul.ts-points > li {
+    border: solid 1px #dcdcdc;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+    display: inline;
+}
+
+ul.ts-points > li:first-child {
+    margin-left: 0px;
+}
+
+.list-header > span.ts-points {
+    padding: 4px;
+    border: solid 1px #999;
+    position: absolute;
+    top: 3px;
+    right: 32px;
+    border-radius: 5px;
+    background-color: rgb(249, 249, 249);
+}

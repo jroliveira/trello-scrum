@@ -1,3 +1,5 @@
+'use strict';
+
 $.fn.exists = function (callback) {
     var args = [].slice.call(arguments, 1);
 

@@ -1,3 +1,5 @@
+'use strict';
+
 function List(elem) {
     this.elem = elem;
     this.actualPoints = 0;
@@ -17,7 +19,7 @@ List.prototype._observeCards = function () {
             self.showPoints(newPoints);
         }
     });
-}
+};
 
 List.prototype.points = function () {
     var points = 0,
@@ -29,7 +31,7 @@ List.prototype.points = function () {
 
     this.actualPoints = points;
     return points;
-}
+};
 
 List.prototype.cards = function () {
     var cards = [],
@@ -40,16 +42,20 @@ List.prototype.cards = function () {
     });
 
     return cards;
-}
+};
 
 List.prototype.showPoints = function (points) {
-    var headerElem = $(this.elem).find('.list-header'),
-        pointsElem = $(headerElem).find('.trell-scrum-points');
+    var $header = $($(this.elem).find('.list-header'));
 
-    if (!pointsElem.exists()) {
-        $(headerElem).append('<span class="trell-scrum-points"></span>');
-        pointsElem = $(headerElem).find('.trell-scrum-points');
+    if ($header.find('.ts-points').exists()) {
+        return;
     }
 
-    $(pointsElem).html(points)
-}
+    var pointsConfig = {
+        class: 'ts-points'
+    };
+
+    $header
+        .append($('<span>', pointsConfig)
+            .text(points));
+};
