@@ -1,7 +1,5 @@
 'use strict';
 
-$.fn.exists = function (callback) {
-    var args = [].slice.call(arguments, 1);
-
+$.fn.exists = function () {
     return this.length > 0;
 };

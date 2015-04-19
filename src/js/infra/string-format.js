@@ -9,4 +9,4 @@ String.prototype.format = function () {
     }
 
     return str;
-}
+};

@@ -44,7 +44,7 @@ Card.prototype._showEstimatePoints = function () {
 
     if ($controls.find('.ts-points').exists()) {
         return;
-    };
+    }
 
     var pointsConfig = {
             class: 'ts-points'
