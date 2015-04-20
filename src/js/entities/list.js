@@ -35,7 +35,7 @@ List.prototype.points = function () {
 
 List.prototype.cards = function () {
     var cards = [],
-        cardsElem = $(this.elem).find('.list-card');
+        cardsElem = $(this.elem).find('.list-card:not(.placeholder)');
 
     $.each(cardsElem, function (i, cardElem) {
         cards.push(new Card(cardElem));

@@ -11,7 +11,7 @@ Card.prototype._observeTitle = function () {
     var self = this,
         observer = new Observer();
 
-    observer.observe(document.body, function (mutations) {
+    observer.observe($('.window').get(0), function (mutations) {
         $.each(mutations, function (index, mutation) {
             var $target = $(mutation.target);
 
