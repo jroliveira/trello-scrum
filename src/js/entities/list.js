@@ -1,25 +1,8 @@
 'use strict';
 
 function List(elem) {
-    this.elem = elem;
-    this.actualPoints = 0;
-
-    this._observeCards();
+    this._elem = elem;
 }
-
-List.prototype._observeCards = function () {
-    var self = this,
-        observer = new Observer();
-
-    observer.observe(this.elem, function () {
-        var actualPoints = self.actualPoints,
-            newPoints = self.points();
-
-        if (actualPoints !== newPoints) {
-            self.showPoints(newPoints);
-        }
-    });
-};
 
 List.prototype.points = function () {
     var points = 0,
@@ -35,7 +18,7 @@ List.prototype.points = function () {
 
 List.prototype.cards = function () {
     var cards = [],
-        cardsElem = $(this.elem).find('.list-card:not(.placeholder)');
+        cardsElem = $(this._elem).find('.list-card:not(.placeholder)');
 
     $.each(cardsElem, function (i, cardElem) {
         cards.push(new Card(cardElem));
@@ -45,17 +28,16 @@ List.prototype.cards = function () {
 };
 
 List.prototype.showPoints = function (points) {
-    var $header = $($(this.elem).find('.list-header'));
+    var $header = $($(this._elem).find('.list-header')),
+        $points = $($header.find('.ts-points'));
 
-    if ($header.find('.ts-points').exists()) {
-        return;
+    if (!$points.exists()) {
+        var pointsConfig = {
+            class: 'ts-points'
+        };
+
+        $points = $('<span>', pointsConfig).appendTo($header);
     }
 
-    var pointsConfig = {
-        class: 'ts-points'
-    };
-
-    $header
-        .append($('<span>', pointsConfig)
-            .text(points));
+    $points.text(points);
 };

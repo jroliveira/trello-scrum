@@ -7,7 +7,7 @@ function App() {
 App.prototype.lists = function () {
     var getLists = new GetLists();
     return getLists.execute();
-}
+};
 
 App.prototype.updateListPoints = function () {
     $.each(this.lists(), function (i, list) {
@@ -17,15 +17,19 @@ App.prototype.updateListPoints = function () {
 };
 
 App.prototype._observeBoard = function () {
-    var self = this,
+    var _this = this,
         observer = new Observer();
 
     observer.observe(document.body, function (mutations) {
         $.each(mutations, function (index, mutation) {
             var $target = $(mutation.target);
 
-            if ($target.hasClass('date js-hide-on-sending')) {
-                self.updateListPoints();
+            if ($target.hasClass('edit-controls')) {
+                Card.showEstimatePoints();
+            }
+
+            if ($target.hasClass('list-cards') || $target.hasClass('list-card-title')) {
+                _this.updateListPoints();
             }
         });
     });

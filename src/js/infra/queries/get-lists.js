@@ -1,13 +1,13 @@
 'use strict';
 
 function GetLists() {
-    this.elem = $('.list');
+    this._elem = $('.list');
 }
 
 GetLists.prototype.execute = function () {
     var lists = [];
 
-    $.each(this.elem, function (i, listElem) {
+    $.each(this._elem, function (i, listElem) {
         lists.push(new List(listElem));
     });
 

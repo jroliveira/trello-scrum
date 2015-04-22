@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+    'use strict';
 
-var app = new App();
-app.updateListPoints();
+    var app = new App();
+    app.updateListPoints();
+})();
