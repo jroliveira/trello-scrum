@@ -1,28 +1,40 @@
-ul.ts-points {
+.ts-points {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #f9f9f9;
+}
+
+.edit-controls > ul {
     list-style: none;
     margin-top: 20px;
 }
 
-ul.ts-points > li {
-    border: solid 1px #dcdcdc;
-    padding: 10px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #F9F9F9;
-    display: inline;
+li.ts-points:first-child {
+    margin-left: 0px;
 }
 
-ul.ts-points > li:first-child {
-    margin-left: 0px;
+li.ts-points {
+    padding: 10px;
+    border-color: #dcdcdc;
+    margin-left: 10px;
+    cursor: pointer;
+    display: inline;
 }
 
 .list-header > span.ts-points {
     padding: 4px;
-    border: solid 1px #999;
+    border-color: #999;
     position: absolute;
     top: 3px;
     right: 32px;
-    border-radius: 5px;
-    background-color: rgb(249, 249, 249);
+}
+
+.badges {
+    margin: 5px 0px 5px 0px;
+}
+
+.badges > span.ts-points {
+    padding: 2px;
+    border-color: #ccc;
 }

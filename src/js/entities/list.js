@@ -4,22 +4,21 @@ function List(elem) {
     this._elem = elem;
 }
 
-List.prototype.points = function () {
-    var points = 0,
-        cards = this.cards();
+List.prototype.getPoints = function () {
+    var points = 0;
 
+    var cards = this.getCards();
     $.each(cards, function (i, card) {
-        points += card.point();
+        points += card.getPoint();
     });
 
-    this.actualPoints = points;
     return points;
 };
 
-List.prototype.cards = function () {
-    var cards = [],
-        cardsElem = $(this._elem).find('.list-card:not(.placeholder)');
+List.prototype.getCards = function () {
+    var cards = [];
 
+    var cardsElem = $(this._elem).find('.list-card:not(.placeholder)');
     $.each(cardsElem, function (i, cardElem) {
         cards.push(new Card(cardElem));
     });
@@ -28,15 +27,15 @@ List.prototype.cards = function () {
 };
 
 List.prototype.showPoints = function (points) {
-    var $header = $($(this._elem).find('.list-header')),
-        $points = $($header.find('.ts-points'));
+    var $header = $($(this._elem).find('.list-header'));
 
+    var $points = $($header.find('.ts-points'));
     if (!$points.exists()) {
-        var pointsConfig = {
+        var attrs = {
             class: 'ts-points'
         };
 
-        $points = $('<span>', pointsConfig).appendTo($header);
+        $points = $('<span>', attrs).appendTo($header);
     }
 
     $points.text(points);
