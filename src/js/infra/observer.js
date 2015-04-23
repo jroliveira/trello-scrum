@@ -10,6 +10,6 @@ function Observer() {
 }
 
 Observer.prototype.observe = function (elem, callback) {
-    var observer = new MutationObserver(callback);
+    let observer = new MutationObserver(callback);
     observer.observe(elem, this.config);
 };

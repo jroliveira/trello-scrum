@@ -1,10 +1,10 @@
 'use strict';
 
 String.prototype.format = function () {
-    var str = this;
+    let str = this;
 
-    for (var i = 0; i < arguments.length; i++) {
-        var reg = new RegExp("\\{" + i + "\\}", "gm");
+    for (let i = 0; i < arguments.length; i++) {
+        let reg = new RegExp("\\{" + i + "\\}", "gm");
         str = str.replace(reg, arguments[i]);
     }
 

@@ -5,7 +5,7 @@ function GetLists() {
 }
 
 GetLists.prototype.execute = function () {
-    var lists = [];
+    let lists = [];
 
     $.each(this._elem, function (i, listElem) {
         lists.push(new List(listElem));
