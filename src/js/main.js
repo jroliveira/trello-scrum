@@ -1,6 +1,6 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    let app = new App();
-    app.updatePoints();
+  let app = new App();
+  app.updatePoints();
 })();

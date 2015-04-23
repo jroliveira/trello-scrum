@@ -1,40 +1,40 @@
 .ts-points {
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    background-color: #f9f9f9;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #f9f9f9;
 }
 
 .edit-controls > ul {
-    list-style: none;
-    margin-top: 20px;
+  list-style: none;
+  margin-top: 20px;
 }
 
 li.ts-points:first-child {
-    margin-left: 0px;
+  margin-left: 0px;
 }
 
 li.ts-points {
-    padding: 10px;
-    border-color: #dcdcdc;
-    margin-left: 10px;
-    cursor: pointer;
-    display: inline;
+  padding: 10px;
+  border-color: #dcdcdc;
+  margin-left: 10px;
+  cursor: pointer;
+  display: inline;
 }
 
 .list-header > span.ts-points {
-    padding: 4px;
-    border-color: #999;
-    position: absolute;
-    top: 3px;
-    right: 32px;
+  padding: 4px;
+  border-color: #999;
+  position: absolute;
+  top: 3px;
+  right: 32px;
 }
 
 .badges {
-    margin: 5px 0px 5px 0px;
+  margin: 5px 0px 5px 0px;
 }
 
 .badges > span.ts-points {
-    padding: 2px;
-    border-color: #ccc;
+  padding: 2px;
+  border-color: #ccc;
 }
