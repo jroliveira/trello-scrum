@@ -26,11 +26,13 @@ App.prototype._observeBoard = function () {
 App.prototype.updatePoints = function () {
   $.each(this._getLists(), function (i, list) {
     let points = list.getPoints();
-    list.showPoints(points);
+
+    (points > 0) ? list.showPoints(points): list.clearPoints();
 
     $.each(list.getCards(), function (i, card) {
       let point = card.getPoint();
-      card.showPoint(point);
+      
+      (point > 0) ? card.showPoint(point): card.clearPoint();
     });
   });
 };

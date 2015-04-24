@@ -10,47 +10,84 @@ Card.prototype.getPoint = function () {
   let regex = /\((.\d*?)\)/g;
   let matches = regex.exec(title);
 
-  return matches ? parseInt(matches[1]) : 0;
+  if (!matches) {
+    return 0;
+  }
+
+  if (isNaN(matches[1])) {
+    return 0;
+  }
+
+  return Number(matches[1]);
+};
+
+Card.prototype.clearPoint = function () {
+  let $point = $($(this._elem).find('.badges > .badge-ts-points'));
+
+  if (!$point.exists()) {
+    return;
+  }
+
+  $point.remove();
 };
 
 Card.prototype.showPoint = function (point) {
-  let $point = $($(this._elem).find('.badges > .ts-points'));
-  if (!$point.exists()) {
-    let attrs = {
-      class: 'ts-points'
-    };
+  let $point = this._getOrCreatePointElement();
 
-    let $badges = $($(this._elem).find('.badges'));
-    $point = $('<span>', attrs).appendTo($badges);
-  }
-
-  let currentPoint = parseInt($point.text());
+  let currentPoint = Number($point.text());
   if (currentPoint === point) {
     return;
   }
 
-  $point.text(point);
-
-  let regex = /\((.\d*?)\)/g;
+  $point.find('span.badge-text').text(point);
 
   let $title = $($(this._elem).find('.list-card-title'));
   let title = this._getTitle();
-  if (title) {
-    if (title.match(regex)) {
-      $title.html($title.html().replace(regex, ''));
-    }
+
+  let regex = /\((.\d*?)\)/g;
+
+  if (title.match(regex)) {
+    $title.html($title.html().replace(regex, ''));
   }
+};
+
+Card.prototype._getOrCreatePointElement = function () {
+  let $point = $($(this._elem).find('.badges > .badge-ts-points'));
+
+  if ($point.exists()) {
+    return $point;
+  }
+
+  let attrs = {
+    container: {
+      class: 'badge badge-ts-points'
+    },
+    icon: {
+      class: 'badge-icon icon-sm flaticon-icon-ts-points'
+    },
+    text: {
+      class: 'badge-text'
+    }
+  };
+
+  let $badges = $($(this._elem).find('.badges'));
+  return $('<div>', attrs.container)
+    .append($('<span>', attrs.icon))
+    .append($('<span>', attrs.text))
+    .appendTo($badges);
 };
 
 Card.prototype._getTitle = function () {
   let $title = $($(this._elem).find('.list-card-title'));
-  if (!$title.attr('data-title')) {
-    let title = $title.text();
-    title = title.replace(title.substr(0, title.indexOf('(')), '');
-    $title.attr('data-title', title);
+
+  if ($title.attr('data-title')) {
+    return $title.attr('data-title');
   }
 
-  return $title.attr('data-title');
+  let title = $title.text();
+  title = title.replace(title.substr(0, title.indexOf('(')), '');
+
+  return $title.attr('data-title', title);
 };
 
 Card.showEstimatePoints = function () {

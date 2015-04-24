@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url('chrome-extension://__MSG_@@extension_id__/libs/flaticon/flaticon.eot');
+  src: 
+    url('chrome-extension://__MSG_@@extension_id__/src/libs/flaticon/flaticon.eot#iefix') format("embedded-opentype"),
+    url('chrome-extension://__MSG_@@extension_id__/src/libs/flaticon/flaticon.woff') format("woff"),
+    url('chrome-extension://__MSG_@@extension_id__/src/libs/flaticon/flaticon.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="flaticon-"]:before,
+[class*=" flaticon-"]:before,
+[class^="flaticon-"]:after,
+[class*=" flaticon-"]:after {
+  font-family: Flaticon;
+  font-style: normal;
+}
+
+.flaticon-icon-ts-points:before {
+  content: "\e000";
+}

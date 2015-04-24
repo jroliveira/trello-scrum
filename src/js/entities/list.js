@@ -4,17 +4,6 @@ function List(elem) {
   this._elem = elem;
 }
 
-List.prototype.getPoints = function () {
-  let points = 0;
-
-  let cards = this.getCards();
-  $.each(cards, function (i, card) {
-    points += card.getPoint();
-  });
-
-  return points;
-};
-
 List.prototype.getCards = function () {
   let cards = [];
 
@@ -26,22 +15,49 @@ List.prototype.getCards = function () {
   return cards;
 };
 
-List.prototype.showPoints = function (points) {
-  let $header = $($(this._elem).find('.list-header'));
+List.prototype.getPoints = function () {
+  let points = 0;
 
-  let $points = $($header.find('.ts-points'));
+  let cards = this.getCards();
+  $.each(cards, function (i, card) {
+    points += card.getPoint();
+  });
+
+  return points;
+};
+
+List.prototype.clearPoints = function () {
+  let $points = $($(this._elem).find('.list-header > .ts-points'));
+
   if (!$points.exists()) {
-    let attrs = {
-      class: 'ts-points'
-    };
-
-    $points = $('<span>', attrs).appendTo($header);
+    return;
   }
 
-  let currentPoints = parseInt($points.text());
+  $points.remove();
+};
+
+List.prototype.showPoints = function (points) {
+  let $points = this._getOrCreatePointElement();
+
+  let currentPoints = Number($points.text());
   if (currentPoints === points) {
     return;
   }
 
   $points.text(points);
+};
+
+List.prototype._getOrCreatePointElement = function () {
+  let $points = $($(this._elem).find('.list-header > .ts-points'));
+
+  if ($points.exists()) {
+    return $points;
+  }
+
+  let attrs = {
+    class: 'ts-points'
+  };
+
+  let $header = $($(this._elem).find('.list-header'));
+  return $('<span>', attrs).appendTo($header);
 };

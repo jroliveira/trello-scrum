@@ -34,7 +34,17 @@ li.ts-points {
   margin: 5px 0px 5px 0px;
 }
 
-.badges > span.ts-points {
-  padding: 2px;
-  border-color: #ccc;
+.badge-ts-points {
+  background-color: #4d4d4d;
+  border-radius: 3px;
+}
+
+.badge-ts-points > .badge-icon {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.badge-ts-points > .badge-text {
+  font-size: 14px;
+  color: #f9f9f9;
 }

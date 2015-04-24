@@ -19,13 +19,18 @@
       "src/js/main.js"
     ],
     "css": [
-      "src/css/style.css"
+      "src/css/style.css",
+      "src/libs/flaticon/flaticon.css"
     ]
   }],
   "icons": {
     "128": "src/img/icon_128x128.png"
   },
-  "web_accessible_resources": [],
+  "web_accessible_resources": [
+    "src/libs/flaticon/flaticon.eot",
+    "src/libs/flaticon/flaticon.ttf",
+    "src/libs/flaticon/flaticon.woff"
+  ],
   "permissions": [
     "storage"
   ]
