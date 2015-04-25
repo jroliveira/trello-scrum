@@ -41,7 +41,7 @@ Card.prototype.showPoint = function (point) {
   let $text = $point.getText();
 
   let currentPoint = $text.text();
-  if (currentPoint == point) {
+  if (currentPoint === point) {
     return;
   }
 

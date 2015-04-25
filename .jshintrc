@@ -15,9 +15,11 @@
     "$": true,
     "App": true,
     "Card": true,
+    "CardDetail": true,
     "List": true,
-    "CardSelector": true,
-    "ListSelector": true,
+    "CardElement": true,
+    "CardDetailElement": true,
+    "ListElement": true,
     "GetLists": true,
     "Observer": true
   }
