@@ -27,6 +27,9 @@ CardDetail.showEstimatePoints = function () {
   let estimatePoints = ['0', '1/2', '1', '2', '3', '5', '8', '13', '20', '40', '100'];
 
   for (let i in estimatePoints) {
-    $points.createPoint(estimatePoints[i], onclick);
+    $points
+      .createPoint()
+      .text(estimatePoints[i])
+      .click(onclick);
   }
 };

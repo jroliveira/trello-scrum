@@ -9,15 +9,12 @@ CardDetailElement.getPoints = function () {
 CardDetailElement.createPoints = function () {
   let $points = $('<ul/>', null).appendTo('.edit-heavy > .edit-controls');
 
-  $points.createPoint = function (point, onclick) {
+  $points.createPoint = function () {
     let attrs = {
       class: 'ts-points'
     };
 
-    $points
-      .append($('<li/>', attrs)
-        .text(point)
-        .click(onclick));
+    return $('<li/>', attrs).appendTo($points);
   };
 
   return $points;

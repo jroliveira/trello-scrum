@@ -5,17 +5,7 @@ function CardElement(elem) {
 }
 
 CardElement.prototype.getTitle = function () {
-  let $title = $($(this._elem).find('.list-card-title'));
-
-  $title.getData = function () {
-    return $title.attr('data-title');
-  };
-
-  $title.setData = function (data) {
-    return $title.attr('data-title', data);
-  };
-
-  return $title;
+  return $($(this._elem).find('.list-card-title'));
 };
 
 CardElement.prototype.getPoint = function () {
@@ -47,7 +37,7 @@ CardElement.prototype.createPoint = function () {
     .append($('<span>', attrs.icon))
     .append($('<span>', attrs.text))
     .appendTo($badges);
-  
+
   return this.getPoint();
 };
 

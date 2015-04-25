@@ -16,11 +16,19 @@ Card.prototype.getPoint = function () {
   let regex = /\((.*?)\)/g;
   let matches = regex.exec(title);
 
-  if (!matches) {
-    return null;
+  if (matches) {
+    return matches[1];
   }
 
-  return matches[1];
+  let $point = this._elem.getPoint();
+
+  if ($point.exists()) {
+    let $text = $point.getText();
+    
+    return $text.text();
+  }
+
+  return null;
 };
 
 Card.prototype.showPoint = function (point) {
@@ -52,13 +60,8 @@ Card.prototype.showPoint = function (point) {
 Card.prototype._getTitle = function () {
   let $title = this._elem.getTitle();
 
-  let data = $title.getData();
-  if (data) {
-    return data;
-  }
+  let title = $title.text();
+  title = title.replace(title.substr(0, title.indexOf('(')), '');
 
-  data = $title.text();
-  data = data.replace(data.substr(0, data.indexOf('(')), '');
-
-  return $title.setData(data);
+  return title;
 };
