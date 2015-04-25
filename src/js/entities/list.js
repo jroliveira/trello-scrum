@@ -4,6 +4,12 @@ function List(elem) {
   this._elem = new ListElement(elem);
 }
 
+List.prototype.removePoints = function () {
+  let $points = this._elem.getPoints();
+
+  $points.remove();
+};
+
 List.prototype.getCards = function () {
   let cards = [];
 
@@ -20,20 +26,28 @@ List.prototype.getPoints = function () {
 
   let cards = this.getCards();
   $.each(cards, function (i, card) {
-    points += card.getPoint();
+    let point = card.getPoint();
+
+    if (!point) {
+      return;
+    }
+
+    if (isNaN(point)) {
+      return;
+    }
+
+    points += Number(point);
   });
 
   return points;
 };
 
-List.prototype.clearPoints = function () {
+List.prototype.showPoints = function (points) {
   let $points = this._elem.getPoints();
 
-  $points.remove();
-};
-
-List.prototype.showPoints = function (points) {
-  let $points = this._getOrCreatePointElement();
+  if (!$points.exists()) {
+    $points = this._elem.createPoints();
+  }
 
   let currentPoints = Number($points.text());
   if (currentPoints === points) {
@@ -41,19 +55,4 @@ List.prototype.showPoints = function (points) {
   }
 
   $points.text(points);
-};
-
-List.prototype._getOrCreatePointElement = function () {
-  let $points = this._elem.getPoints();
-
-  if ($points.exists()) {
-    return $points;
-  }
-
-  let attrs = {
-    class: 'ts-points'
-  };
-
-  let $header = this._elem.getHead();
-  return $('<span>', attrs).appendTo($header);
 };

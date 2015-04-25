@@ -13,7 +13,7 @@ App.prototype._observeBoard = function () {
       let $target = $(mutation.target);
 
       if ($target.hasClass('edit-controls')) {
-        Card.showEstimatePoints();
+        CardDetail.showEstimatePoints();
       }
 
       if ($target.hasClass('list-cards') || $target.hasClass('list-card-title')) {
@@ -30,16 +30,16 @@ App.prototype.updatePoints = function () {
     if (points > 0) {
       list.showPoints(points);
     } else {
-      list.clearPoints();
+      list.removePoints();
     }
 
     $.each(list.getCards(), function (i, card) {
       let point = card.getPoint();
 
-      if (point > 0) {
+      if (point) {
         card.showPoint(point);
       } else {
-        card.clearPoint();
+        card.removePoint();
       }
     });
   });

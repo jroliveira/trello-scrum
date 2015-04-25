@@ -13,9 +13,11 @@
       "src/js/infra/extensions/string-format.js",
       "src/js/infra/queries/get-lists.js",
       "src/js/infra/elements/card-element.js",
+      "src/js/infra/elements/card-detail-element.js",
       "src/js/infra/elements/list-element.js",
       "src/js/infra/observer.js",
       "src/js/entities/card.js",
+      "src/js/entities/card-detail.js",
       "src/js/entities/list.js",
       "src/js/app.js",
       "src/js/main.js"

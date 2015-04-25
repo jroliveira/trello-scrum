@@ -43,10 +43,12 @@ CardElement.prototype.createPoint = function () {
     }
   };
 
-  return $('<div>', attrs.container)
+  $('<div>', attrs.container)
     .append($('<span>', attrs.icon))
     .append($('<span>', attrs.text))
     .appendTo($badges);
+  
+  return this.getPoint();
 };
 
 CardElement.prototype.getCards = function () {
