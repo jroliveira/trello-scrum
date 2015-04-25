@@ -27,12 +27,20 @@ App.prototype.updatePoints = function () {
   $.each(this._getLists(), function (i, list) {
     let points = list.getPoints();
 
-    (points > 0) ? list.showPoints(points): list.clearPoints();
+    if (points > 0) {
+      list.showPoints(points);
+    } else {
+      list.clearPoints();
+    }
 
     $.each(list.getCards(), function (i, card) {
       let point = card.getPoint();
-      
-      (point > 0) ? card.showPoint(point): card.clearPoint();
+
+      if (point > 0) {
+        card.showPoint(point);
+      } else {
+        card.clearPoint();
+      }
     });
   });
 };

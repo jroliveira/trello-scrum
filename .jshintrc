@@ -13,7 +13,11 @@
   "globals": {
     "chrome": true,
     "$": true,
+    "App": true,
     "Card": true,
+    "List": true,
+    "CardSelector": true,
+    "ListSelector": true,
     "GetLists": true,
     "Observer": true
   }

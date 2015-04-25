@@ -1,15 +1,15 @@
 'use strict';
 
 function List(elem) {
-  this._elem = elem;
+  this._elem = new ListElement(elem);
 }
 
 List.prototype.getCards = function () {
   let cards = [];
 
-  let cardsElem = $(this._elem).find('.list-card:not(.placeholder)');
-  $.each(cardsElem, function (i, cardElem) {
-    cards.push(new Card(cardElem));
+  let $cards = this._elem.getCards();
+  $.each($cards, function (i, $card) {
+    cards.push(new Card($card));
   });
 
   return cards;
@@ -27,11 +27,7 @@ List.prototype.getPoints = function () {
 };
 
 List.prototype.clearPoints = function () {
-  let $points = $($(this._elem).find('.list-header > .ts-points'));
-
-  if (!$points.exists()) {
-    return;
-  }
+  let $points = this._elem.getPoints();
 
   $points.remove();
 };
@@ -48,7 +44,7 @@ List.prototype.showPoints = function (points) {
 };
 
 List.prototype._getOrCreatePointElement = function () {
-  let $points = $($(this._elem).find('.list-header > .ts-points'));
+  let $points = this._elem.getPoints();
 
   if ($points.exists()) {
     return $points;
@@ -58,6 +54,6 @@ List.prototype._getOrCreatePointElement = function () {
     class: 'ts-points'
   };
 
-  let $header = $($(this._elem).find('.list-header'));
+  let $header = this._elem.getHead();
   return $('<span>', attrs).appendTo($header);
 };

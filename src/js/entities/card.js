@@ -1,7 +1,7 @@
 'use strict';
 
 function Card(elem) {
-  this._elem = elem;
+  this._elem = new CardElement(elem);
 }
 
 Card.prototype.getPoint = function () {
@@ -22,26 +22,28 @@ Card.prototype.getPoint = function () {
 };
 
 Card.prototype.clearPoint = function () {
-  let $point = $($(this._elem).find('.badges > .badge-ts-points'));
-
-  if (!$point.exists()) {
-    return;
-  }
+  let $point = this._elem.getPoint();
 
   $point.remove();
 };
 
 Card.prototype.showPoint = function (point) {
-  let $point = this._getOrCreatePointElement();
+  let $point = this._elem.getPoint();
 
-  let currentPoint = Number($point.text());
+  if (!$point.exists()) {
+    this._elem.createPoint();
+  }
+
+  let $text = $point.getText();
+
+  let currentPoint = Number($text.text());
   if (currentPoint === point) {
     return;
   }
 
-  $point.find('span.badge-text').text(point);
+  $text.text(point);
 
-  let $title = $($(this._elem).find('.list-card-title'));
+  let $title = this._elem.getTitle();
   let title = this._getTitle();
 
   let regex = /\((.\d*?)\)/g;
@@ -51,73 +53,42 @@ Card.prototype.showPoint = function (point) {
   }
 };
 
-Card.prototype._getOrCreatePointElement = function () {
-  let $point = $($(this._elem).find('.badges > .badge-ts-points'));
-
-  if ($point.exists()) {
-    return $point;
-  }
-
-  let attrs = {
-    container: {
-      class: 'badge badge-ts-points'
-    },
-    icon: {
-      class: 'badge-icon icon-sm flaticon-icon-ts-points'
-    },
-    text: {
-      class: 'badge-text'
-    }
-  };
-
-  let $badges = $($(this._elem).find('.badges'));
-  return $('<div>', attrs.container)
-    .append($('<span>', attrs.icon))
-    .append($('<span>', attrs.text))
-    .appendTo($badges);
-};
-
 Card.prototype._getTitle = function () {
-  let $title = $($(this._elem).find('.list-card-title'));
+  let $title = this._elem.getTitle();
 
-  if ($title.attr('data-title')) {
-    return $title.attr('data-title');
+  let data = $title.getData();
+  if (data) {
+    return data;
   }
 
-  let title = $title.text();
-  title = title.replace(title.substr(0, title.indexOf('(')), '');
+  data = $title.text();
+  data = data.replace(data.substr(0, data.indexOf('(')), '');
 
-  return $title.attr('data-title', title);
+  return $title.setData(data);
 };
 
 Card.showEstimatePoints = function () {
-  let $controls = $('.edit-heavy > .edit-controls');
-  if ($controls.find('.ts-points').exists()) {
+  let $points = CardElement.getPoints();
+
+  if ($points.exists()) {
     return;
   }
 
-  let $points = $('<ul/>', null).appendTo($controls);
-
-  let attrs = {
-    class: 'ts-points'
-  };
+  $points = CardElement.createPoints();
 
   let onclick = function onclick() {
     let value = '({0}) '.format($(this).text());
 
     let regex = /\((.\d*?)\)/g;
 
-    let $title = $('.card-detail-title > .edit > textarea.field');
+    let $title = CardElement.getTitle();
     $title[0].value = $title.val().match(regex) ? $title.val().replace(regex, value) : '{0}{1}'.format(value, $title.val());
 
-    $('.card-detail-title > .edit > .edit-controls > .js-save-edit').click();
+    CardElement.getButton().click();
   };
 
   let estimatePoints = ['0', '1/2', '1', '2', '3', '5', '8', '13', '20', '40', '100'];
   for (let i in estimatePoints) {
-    $points
-      .append($('<li/>', attrs)
-        .text(estimatePoints[i])
-        .click(onclick));
+    $points.createPoint(estimatePoints[i], onclick);
   }
 };
