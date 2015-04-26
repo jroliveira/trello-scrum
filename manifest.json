@@ -1,7 +1,7 @@
 {
   "name": "Trello Scrum",
   "description": "...",
-  "version": "0.3",
+  "version": "0.5",
   "manifest_version": 2,
   "content_scripts": [{
     "matches": [
@@ -11,6 +11,7 @@
       "src/libs/jquery/dist/jquery.min.js",
       "src/js/infra/extensions/exists.js",
       "src/js/infra/extensions/string-format.js",
+      "src/js/infra/queries/get-estimate-points.js",
       "src/js/infra/queries/get-lists.js",
       "src/js/infra/elements/card-element.js",
       "src/js/infra/elements/card-detail-element.js",

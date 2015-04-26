@@ -20,6 +20,7 @@
     "CardElement": true,
     "CardDetailElement": true,
     "ListElement": true,
+    "GetEstimatePoints": true,
     "GetLists": true,
     "Observer": true
   }
