@@ -13,7 +13,8 @@ App.prototype._observeBoard = function () {
       let $target = $(mutation.target);
 
       if ($target.hasClass('edit-controls')) {
-        CardDetail.showEstimatePoints();
+        let cardDetail = new CardDetail();
+        cardDetail.showEstimatePoints();
       }
 
       if ($target.hasClass('list-cards') || $target.hasClass('list-card-title')) {
@@ -48,4 +49,9 @@ App.prototype.updatePoints = function () {
 App.prototype._getLists = function () {
   let getLists = new GetLists();
   return getLists.execute();
+};
+
+App.prototype.showButtonSettings = function () {
+  let board = new Board();
+  board.showSettings();
 };

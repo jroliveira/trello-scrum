@@ -3,4 +3,5 @@
 
   let app = new App();
   app.updatePoints();
+  app.showButtonSettings();
 })();

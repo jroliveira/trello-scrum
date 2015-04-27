@@ -2,11 +2,11 @@
 
 function CardDetailElement() {}
 
-CardDetailElement.getPoints = function () {
+CardDetailElement.prototype.getPoints = function () {
   return $('.edit-heavy > .edit-controls > ul > .ts-points');
 };
 
-CardDetailElement.createPoints = function () {
+CardDetailElement.prototype.createPoints = function () {
   let $points = $('<ul/>', null).appendTo('.edit-heavy > .edit-controls');
 
   $points.createPoint = function () {
@@ -20,10 +20,10 @@ CardDetailElement.createPoints = function () {
   return $points;
 };
 
-CardDetailElement.getTitle = function () {
+CardDetailElement.prototype.getTitle = function () {
   return $('.card-detail-title > .edit > textarea.field');
 };
 
-CardDetailElement.getButton = function () {
+CardDetailElement.prototype.getButton = function () {
   return $('.card-detail-title > .edit > .edit-controls > .js-save-edit');
 };
