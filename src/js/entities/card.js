@@ -12,7 +12,7 @@ Card.prototype.removePoint = function () {
 
 Card.prototype.getPoint = function () {
   let _this = this;
-  
+
   let getPoint = function getPoint() {
     let $title = _this._elem.getTitle();
     let title = $title.text();
@@ -35,10 +35,15 @@ Card.prototype.getPoint = function () {
     return $text.text();
   };
 
+  let point = getPoint();
+
+  if (!point) {
+    return null;
+  }
+
   let getEstimatePoints = new GetEstimatePoints();
   let estimatePoints = getEstimatePoints.execute();
-  
-  let point = getPoint();
+
   let found = $.inArray(point, estimatePoints);
 
   if (found < 0) {

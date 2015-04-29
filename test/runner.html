@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Cow tests</title>
+  <link rel="stylesheet" media="all" href="../src/libs/mocha/mocha.css">
+</head>
+
+<body>
+  <div id="mocha">
+    <p><a href=".">Index</a>
+    </p>
+  </div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>
+
+  <!-- libs -->
+  <script src="../src/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../src/libs/mocha/mocha.js"></script>
+  <script src="../src/libs/chai/index.js"></script>
+  <script src="../src/libs/sinon-1.14.0/index.js"></script>
+
+  <!-- src -->
+  <script src="../src/js/infra/queries/get-estimate-points.js"></script>
+  <script src="../src/js/infra/elements/card-element.js"></script>
+  <script src="../src/js/entities/card.js"></script>
+
+  <!-- fakes -->
+  <script src="../test/fakes/element-fake.js"></script>
+
+  <script>
+    mocha.setup('bdd');
+    var should = chai.should();
+  </script>
+
+  <!-- specs -->
+  <script src="../test/specs/card-spec.js"></script>
+
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>
