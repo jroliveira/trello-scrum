@@ -31,4 +31,114 @@ describe('Card', function () {
       sinon.assert.calledOnce(ElementFake.prototype.remove);
     });
   });
+
+  describe('when get point', function () {
+    beforeEach(function () {
+      sandbox.stub(CardElement.prototype, 'getPoint').returns(new ElementFake());
+    });
+
+    it('should call _elem.getTitle() one time', function () {
+      sandbox.spy(CardElement.prototype, 'getTitle');
+
+      card.getPoint();
+
+      sinon.assert.calledOnce(CardElement.prototype.getTitle);
+    });
+
+    it('should call $title.text() one time', function () {
+      sandbox.stub(CardElement.prototype, 'getTitle').returns(new ElementFake());
+      sandbox.spy(ElementFake.prototype, 'text');
+
+      card.getPoint();
+
+      sinon.assert.calledOnce(ElementFake.prototype.text);
+    });
+
+    describe('point in the title', function () {
+      beforeEach(function () {
+        sandbox.stub(CardElement.prototype, 'getTitle').returns(new ElementFake());
+        sandbox.stub(ElementFake.prototype, 'text').returns('(8) Title of card');
+      });
+
+      it('should equal to 8', function () {
+        let point = card.getPoint();
+        
+        point.should.equal('8');
+      });
+    });
+
+    describe('no point in the title', function () {
+      beforeEach(function () {
+
+      });
+
+      it('should call $point.exists() one time', function () {
+        sandbox.spy(ElementFake.prototype, 'exists');
+
+        card.getPoint();
+
+        sinon.assert.calledOnce(ElementFake.prototype.exists);
+      });
+
+      describe('point found', function () {
+        beforeEach(function () {
+          sandbox.stub(ElementFake.prototype, 'exists').returns(true);
+          sandbox.stub(ElementFake.prototype, 'getText').returns(new ElementFake());
+          sandbox.stub(ElementFake.prototype, 'text').returns(1);
+        });
+
+        it('should call getEstimatePoints.execute() one time', function () {
+          sandbox.spy(GetEstimatePoints.prototype, 'execute');
+
+          card.getPoint();
+
+          sinon.assert.calledOnce(GetEstimatePoints.prototype.execute);
+        });
+
+        it('should call $.inArray() one time', function () {
+          sandbox.spy($, 'inArray');
+
+          card.getPoint();
+
+          sinon.assert.calledOnce($.inArray);
+        });
+
+        describe('in array', function () {
+          beforeEach(function () {
+            sandbox.stub($, 'inArray').returns(0);
+          });
+
+          it('should equal to 1', function () {
+            let point = card.getPoint();
+
+            point.should.equal(1);
+          });
+        });
+
+        describe('out of array', function () {
+          beforeEach(function () {
+            sandbox.stub($, 'inArray').returns(-1);
+          });
+
+          it('should equal to null', function () {
+            let point = card.getPoint();
+
+            should.not.exist(point);
+          });
+        });
+      });
+
+      describe('not point found', function () {
+        beforeEach(function () {
+          sandbox.stub(ElementFake.prototype, 'exists').returns(false);
+        });
+
+        it('should equal to null', function () {
+          let point = card.getPoint();
+
+          should.not.exist(point);
+        });
+      });
+    });
+  });
 });
