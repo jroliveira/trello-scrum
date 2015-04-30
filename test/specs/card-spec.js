@@ -62,7 +62,7 @@ describe('Card', function () {
 
       it('should equal to 8', function () {
         let point = card.getPoint();
-        
+
         point.should.equal('8');
       });
     });
@@ -138,6 +138,50 @@ describe('Card', function () {
 
           should.not.exist(point);
         });
+      });
+    });
+  });
+
+  describe('when show point', function () {
+    beforeEach(function () {
+      sandbox.stub(CardElement.prototype, 'getPoint').returns(new ElementFake());
+      sandbox.stub(ElementFake.prototype, 'getText').returns(new ElementFake());
+    });
+
+    it('should call $point.exists() one time', function () {
+      sandbox.spy(ElementFake.prototype, 'exists');
+
+      card.showPoint(1);
+
+      sinon.assert.calledOnce(ElementFake.prototype.exists);
+    });
+
+    describe('not point found', function () {
+      beforeEach(function () {
+        sandbox.stub(ElementFake.prototype, 'exists').returns(false);
+      });
+
+      it('should call _elem.createPoint() one time', function () {
+        sandbox.spy(CardElement.prototype, 'createPoint');
+
+        card.showPoint(1);
+
+        sinon.assert.calledOnce(CardElement.prototype.createPoint);
+      });
+    });
+
+    it('should call $text.text(1) one time', function () {
+      let spy = sandbox.spy(ElementFake.prototype, 'text');
+
+      card.showPoint(1);
+
+      spy.withArgs(1).calledOnce.should.equal(true);
+    });
+
+    describe('point in title', function () {
+      beforeEach(function () {
+        sandbox.stub(CardElement.prototype, 'getTitle').returns(new ElementFake());
+        sandbox.stub(ElementFake.prototype, 'text').returns('(1) Title of card');
       });
     });
   });
