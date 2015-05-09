@@ -11,42 +11,26 @@ Card.prototype.removePoint = function () {
 };
 
 Card.prototype.getPoint = function () {
-  let _this = this;
+  let $title = this._elem.getTitle();
+  let title = $title.text();
 
-  let getPoint = function getPoint() {
-    let $title = _this._elem.getTitle();
-    let title = $title.text();
+  let regex = /\((.*?)\)/g;
+  let matches = regex.exec(title);
 
-    let regex = /\((.*?)\)/g;
-    let matches = regex.exec(title);
+  if (matches) {
+    return matches[1];
+  }
 
-    if (matches) {
-      return matches[1];
-    }
+  let $point = this._elem.getPoint();
 
-    let $point = _this._elem.getPoint();
-
-    if (!$point.exists()) {
-      return null;
-    }
-
-    let $text = $point.getText();
-
-    return $text.text();
-  };
-
-  let point = getPoint();
-
-  if (!point) {
+  if (!$point.exists()) {
     return null;
   }
 
-  let getEstimatePoints = new GetEstimatePoints();
-  let estimatePoints = getEstimatePoints.execute();
+  let $text = $point.getText();
+  let point = $text.text();
 
-  let found = $.inArray(point, estimatePoints);
-
-  if (found < 0) {
+  if (!point) {
     return null;
   }
 

@@ -68,10 +68,6 @@ describe('Card', function () {
     });
 
     describe('no point in the title', function () {
-      beforeEach(function () {
-
-      });
-
       it('should call $point.exists() one time', function () {
         sandbox.spy(ElementFake.prototype, 'exists');
 
@@ -87,44 +83,10 @@ describe('Card', function () {
           sandbox.stub(ElementFake.prototype, 'text').returns(1);
         });
 
-        it('should call getEstimatePoints.execute() one time', function () {
-          sandbox.spy(GetEstimatePoints.prototype, 'execute');
+        it('should equal to 1', function () {
+          let point = card.getPoint();
 
-          card.getPoint();
-
-          sinon.assert.calledOnce(GetEstimatePoints.prototype.execute);
-        });
-
-        it('should call $.inArray() one time', function () {
-          sandbox.spy($, 'inArray');
-
-          card.getPoint();
-
-          sinon.assert.calledOnce($.inArray);
-        });
-
-        describe('in array', function () {
-          beforeEach(function () {
-            sandbox.stub($, 'inArray').returns(0);
-          });
-
-          it('should equal to 1', function () {
-            let point = card.getPoint();
-
-            point.should.equal(1);
-          });
-        });
-
-        describe('out of array', function () {
-          beforeEach(function () {
-            sandbox.stub($, 'inArray').returns(-1);
-          });
-
-          it('should equal to null', function () {
-            let point = card.getPoint();
-
-            should.not.exist(point);
-          });
+          point.should.equal(1);
         });
       });
 
