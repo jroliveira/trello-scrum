@@ -48,7 +48,7 @@ describe('List', function () {
 
       cards.should.have.length(3);
     });
-    
+
     it('should be empty', function () {
       sandbox.stub(ListElement.prototype, 'getCards').returns([]);
 
@@ -56,5 +56,64 @@ describe('List', function () {
 
       expect(cards).to.be.empty;
     });
-  });  
+  });
+
+  describe('when get points', function () {
+    describe('cards in the list', function () {
+      beforeEach(function () {
+        sandbox.stub(CardElement.prototype, 'getPoint').returns(new ElementFake());
+      });
+
+      it('should call card.getPoint() three time', function () {
+        sandbox.stub(ListElement.prototype, 'getCards').returns([sinon.spy(), sinon.spy(), sinon.spy()]);
+        sandbox.spy(Card.prototype, 'getPoint');
+
+        list.getPoints();
+
+        sinon.assert.calledThrice(CardElement.prototype.getPoint);
+      });
+
+      describe('card point equal to three', function () {
+        it('should equal to 3', function () {
+          sandbox.stub(ListElement.prototype, 'getCards').returns([sinon.spy()]);
+          sandbox.stub(Card.prototype, 'getPoint').returns(3);
+
+          let points = list.getPoints();
+
+          points.should.equal(3);
+        });
+      });
+
+      describe('no point in the card', function () {
+        it('should equal to 0', function () {
+          sandbox.stub(ListElement.prototype, 'getCards').returns([sinon.spy()]);
+
+          let points = list.getPoints();
+
+          points.should.equal(0);
+        });
+      });
+
+      describe('card point is not a number', function () {
+        it('should equal to 0', function () {
+          sandbox.stub(ListElement.prototype, 'getCards').returns([sinon.spy()]);
+          sandbox.stub(Card.prototype, 'getPoint').returns('?');
+
+          let points = list.getPoints();
+
+          points.should.equal(0);
+        });
+      });
+    });
+
+    describe('no cards in the list', function () {
+      it('should equal to 0', function () {
+        sandbox.stub(ListElement.prototype, 'getCards').returns([]);
+
+        let points = list.getPoints();
+
+        points.should.equal(0);
+      });
+    });
+  });
 });
