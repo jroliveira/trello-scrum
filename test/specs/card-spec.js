@@ -177,12 +177,5 @@ describe('Card', function () {
 
       spy.withArgs(1).calledOnce.should.equal(true);
     });
-
-    describe('point in title', function () {
-      beforeEach(function () {
-        sandbox.stub(CardElement.prototype, 'getTitle').returns(new ElementFake());
-        sandbox.stub(ElementFake.prototype, 'text').returns('(1) Title of card');
-      });
-    });
   });
 });
