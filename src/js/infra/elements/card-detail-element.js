@@ -3,11 +3,11 @@
 function CardDetailElement() {}
 
 CardDetailElement.prototype.getPoints = function () {
-  return $('.edit-heavy > .edit-controls > ul > .ts-points');
+  return $('.card-detail-window .edit-heavy > .edit-controls > ul > .ts-points');
 };
 
 CardDetailElement.prototype.createPoints = function () {
-  let $points = $('<ul/>', null).appendTo('.edit-heavy > .edit-controls');
+  let $points = $('<ul/>', null).appendTo('.card-detail-window .edit-heavy > .edit-controls');
 
   $points.createPoint = function () {
     let attrs = {
