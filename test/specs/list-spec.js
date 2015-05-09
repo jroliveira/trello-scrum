@@ -30,5 +30,31 @@ describe('List', function () {
 
       sinon.assert.calledOnce(ElementFake.prototype.remove);
     });
+  });
+
+  describe('when get cards', function () {
+    it('should call _elem.getCards() one time', function () {
+      sandbox.spy(ListElement.prototype, 'getCards');
+
+      list.getCards();
+
+      sinon.assert.calledOnce(ListElement.prototype.getCards);
+    });
+
+    it('should have tree elements', function () {
+      sandbox.stub(ListElement.prototype, 'getCards').returns([sinon.spy(), sinon.spy(), sinon.spy()]);
+
+      let cards = list.getCards();
+
+      cards.should.have.length(3);
+    });
+    
+    it('should be empty', function () {
+      sandbox.stub(ListElement.prototype, 'getCards').returns([]);
+
+      let cards = list.getCards();
+
+      expect(cards).to.be.empty;
+    });
   });  
 });
