@@ -1,3 +1,5 @@
+'use strict';
+
 // Karma configuration
 // Generated on Tue May 05 2015 12:01:50 GMT-0300 (Hora oficial do Brasil)
 

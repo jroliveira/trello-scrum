@@ -1,12 +1,15 @@
-var gulp = require('gulp');
-var vfs = require('vinyl-fs');
-var karma = require('karma').server;
+'use strict';
+
+const
+  gulp = require('gulp'),
+  vfs = require('vinyl-fs'),
+  karma = require('karma').server;
 
 /**
  * Run jscs code style
  */
 gulp.task('jscs', function () {
-  var jscs = require('gulp-jscs');
+  let jscs = require('gulp-jscs');
 
   vfs.src('./src/js/**/*.js')
     .pipe(jscs({
@@ -18,10 +21,14 @@ gulp.task('jscs', function () {
 /**
  * Run jshint for code analysis
  */
-gulp.task('lint', function () {  
-  var jshint = require('gulp-jshint');
+gulp.task('lint', function () {
+  let jshint = require('gulp-jshint');
 
-  vfs.src('./src/js/**/*.js')
+  vfs.src([
+      './*.js',
+      './src/js/**/*.js',
+
+    ])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
