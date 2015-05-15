@@ -19,12 +19,12 @@ CardDetail.prototype.showEstimatePoints = function () {
     let value = '({0}) '.format($(this).text());
     let regex = /\((.\d*?)\)/g;
 
-    let $title = _this.getTitle();
+    let $title = _this._elem.getTitle();
     let title = $title.val();
 
     $title[0].value = title.match(regex) ? title.replace(regex, value) : '{0}{1}'.format(value, title);
 
-    let $button = _this.getButton();
+    let $button = _this._elem.getButton();
     $button.click();
   };
 
