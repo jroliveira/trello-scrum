@@ -28,6 +28,6 @@ para rodar os testes
 
 ### Como utilizar?
 
-Para adicinar pontos a um cartão, utilize () no título do cartão ou clique no cartão e depois no título do mesmo para abrir as sugestões de pontos.
+Para adicionar pontos a um cartão, utilize () no título do cartão ou clique no cartão e depois no título do mesmo para abrir as sugestões de pontos.
 
 Para ver um exemplo de utilização e acompanhar os recursos que já foram e serão desenvolvidos acesse o [board público do projeto](https://goo.gl/71aerP).

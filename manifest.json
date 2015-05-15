@@ -1,7 +1,7 @@
 {
   "name": "Trello Scrum",
-  "description": "...",
-  "version": "0.7",
+  "description": "Adiciona recursos do scrum ao board do trello",
+  "version": "0.8",
   "manifest_version": 2,
   "content_scripts": [{
     "matches": [
