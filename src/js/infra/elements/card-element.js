@@ -40,36 +40,3 @@ CardElement.prototype.createPoint = function () {
 
   return this.getPoint();
 };
-
-CardElement.prototype.getCards = function () {
-  return $($(this._elem).find('.list-card:not(.placeholder)'));
-};
-
-CardElement.getPoints = function () {
-  return $('.edit-heavy > .edit-controls > ul > .ts-points');
-};
-
-CardElement.createPoints = function () {
-  let $points = $('<ul/>', null).appendTo('.edit-heavy > .edit-controls');
-
-  $points.createPoint = function (point, onclick) {
-    let attrs = {
-      class: 'ts-points'
-    };
-
-    $points
-      .append($('<li/>', attrs)
-        .text(point)
-        .click(onclick));
-  };
-
-  return $points;
-};
-
-CardElement.getTitle = function () {
-  return $('.card-detail-title > .edit > textarea.field');
-};
-
-CardElement.getButton = function () {
-  return $('.card-detail-title > .edit > .edit-controls > .js-save-edit');
-};

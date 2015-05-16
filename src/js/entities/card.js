@@ -14,7 +14,7 @@ Card.prototype.getPoint = function () {
   let $title = this._elem.getTitle();
   let title = $title.text();
 
-  let regex = /\((.*?)\)/g;
+  let regex = /\((.[0-9]*?)\)/g;
   let matches = regex.exec(title);
 
   if (matches) {
@@ -56,9 +56,10 @@ Card.prototype.showPoint = function (point) {
   let $title = this._elem.getTitle();
   let title = $title.text();
 
-  let regex = /\((.*?)\)/g;
+  let regex = /\((.[0-9]*?)\)/g;
+  let matches = regex.exec(title);
 
-  if (title.match(regex)) {
-    $title.html($title.html().replace(regex, ''));
+  if (matches) {
+    $title.html($title.html().replace(matches[0], ''));
   }
 };
