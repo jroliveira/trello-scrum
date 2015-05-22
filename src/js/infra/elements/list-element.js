@@ -4,10 +4,6 @@ function ListElement(elem) {
   this._elem = elem;
 }
 
-ListElement.getLists = function () {
-  return $('.list');
-};
-
 ListElement.prototype.getPoints = function () {
   return $($(this._elem).find('.list-header > .ts-points'));
 };

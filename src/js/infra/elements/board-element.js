@@ -2,6 +2,10 @@
 
 function BoardElement() {}
 
+BoardElement.prototype.getLists = function () {
+  return $('.list');
+};
+
 BoardElement.prototype.getSettings = function () {
   return $('.board-header > .board-header-btns.mod-right > .settings-ts-btn');
 };

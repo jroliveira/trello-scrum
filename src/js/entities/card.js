@@ -1,8 +1,18 @@
 'use strict';
 
-function Card(elem) {
+function Card(elem, list) {
   this._elem = new CardElement(elem);
+  this._list = list;
+
+  let _this = this;
+  
+  let observer = new Observer();
+  observer.observe(_this._elem.getTitle().get(0), function () {
+    _this.onChange();
+  });
 }
+
+Card.prototype.onChange = function () {};
 
 Card.prototype.removePoint = function () {
   let $point = this._elem.getPoint();
@@ -26,6 +36,10 @@ Card.prototype.getPoint = function () {
   if (!$point.exists()) {
     return null;
   }
+
+  //if (!$point.isNew()) {
+  //  return null;
+  //}
 
   let $text = $point.getText();
   let point = $text.text();

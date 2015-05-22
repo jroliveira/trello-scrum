@@ -1,57 +1,33 @@
 'use strict';
 
 function App() {
-  this._observeBoard();
-}
+  this._elem = new AppElement();
 
-App.prototype._observeBoard = function () {
+  this._board = new Board();
+  this._board.showSettings();
+
   let _this = this;
 
   let observer = new Observer();
-  observer.observe(document.body, function (mutations) {
-    $.each(mutations, function (index, mutation) {
-      let $target = $(mutation.target);
-
-      if ($target.hasClass('edit-controls')) {
-        let cardDetail = new CardDetail();
-        cardDetail.showEstimatePoints();
-      }
-
-      if ($target.hasClass('list-cards') || $target.hasClass('list-card-title')) {
-        _this.updatePoints();
-      }
-    });
+  observer.observe(_this._elem.getHeader().get(0), function (mutations) {
+    _this.onLoad(mutations);
   });
-};
+}
 
-App.prototype.updatePoints = function () {
-  $.each(this._getLists(), function (i, list) {
-    let points = list.getPoints();
+App.prototype.onLoad = function (mutations) {
+  let skipped = true;
 
-    if (points > 0) {
-      list.showPoints(points);
-    } else {
-      list.removePoints();
-    }
-
-    $.each(list.getCards(), function (i, card) {
-      let point = card.getPoint();
-
-      if (point) {
-        card.showPoint(point);
-      } else {
-        card.removePoint();
-      }
-    });
+  $.each(mutations, function (i, mutation) {
+    skipped = $(mutation.target).attr('class') === 'js-phrase';
   });
-};
 
-App.prototype._getLists = function () {
-  let getLists = new GetLists();
-  return getLists.execute();
-};
+  if (skipped) {
+    return;
+  }
 
-App.prototype.showButtonSettings = function () {
-  let board = new Board();
-  board.showSettings();
+  let _this = this;
+
+  Thread.sleep(200, function () {
+    _this._board = new Board();
+  });
 };

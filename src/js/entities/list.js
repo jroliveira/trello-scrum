@@ -2,7 +2,34 @@
 
 function List(elem) {
   this._elem = new ListElement(elem);
+  this._cards = [];
+
+  let _this = this;
+
+  $.each(_this._elem.getCards(), function (i, $card) {
+    let newCard = new Card($card, _this);
+
+    newCard.onChange = function () {
+      _this._updateCard(this);
+      _this.onCardChange();
+    };
+
+    _this._cards.push(newCard);
+    _this._updateCard(newCard);
+  });
 }
+
+List.prototype.onCardChange = function () {};
+
+List.prototype._updateCard = function (card) {
+  let point = card.getPoint();
+
+  if (point) {
+    card.showPoint(point);
+  } else {
+    card.removePoint();
+  }
+};
 
 List.prototype.removePoints = function () {
   let $points = this._elem.getPoints();
@@ -10,22 +37,10 @@ List.prototype.removePoints = function () {
   $points.remove();
 };
 
-List.prototype.getCards = function () {
-  let cards = [];
-
-  let $cards = this._elem.getCards();
-  $.each($cards, function (i, $card) {
-    cards.push(new Card($card));
-  });
-
-  return cards;
-};
-
 List.prototype.getPoints = function () {
   let points = 0;
 
-  let cards = this.getCards();
-  $.each(cards, function (i, card) {
+  $.each(this._cards, function (i, card) {
     let point = card.getPoint();
 
     if (!point) {
